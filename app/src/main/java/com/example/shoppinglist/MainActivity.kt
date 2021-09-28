@@ -3,13 +3,15 @@ package com.example.shoppinglist
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.tabs.TabLayout
-import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import com.example.shoppinglist.ui.main.SectionsPagerAdapter
 import com.example.shoppinglist.databinding.ActivityMainBinding
+import com.google.android.material.tabs.TabLayoutMediator
+
+private val TAB_TITLES = arrayOf(
+    R.string.tab_text_1,
+    R.string.tab_text_2
+)
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,11 +23,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
-        val viewPager: ViewPager = binding.viewPager
+        val sectionsPagerAdapter = SectionsPagerAdapter(this)
+        val viewPager = binding.viewPager
         viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = binding.tabs
-        tabs.setupWithViewPager(viewPager)
+        val tabs = binding.tabs
+        TabLayoutMediator(tabs, viewPager) { tab, position ->
+            tab.text = getString(TAB_TITLES[position])
+        }.attach()
+
         val fab: FloatingActionButton = binding.fab
 
         fab.setOnClickListener { view ->
