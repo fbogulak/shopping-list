@@ -1,22 +1,21 @@
-package com.example.shoppinglist.ui.shoppinglists
+package com.example.shoppinglist.ui.currentlists
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.shoppinglist.R
-import com.example.shoppinglist.databinding.FragmentShoppingListsBinding
+import com.example.shoppinglist.databinding.FragmentCurrentListsBinding
 
-class ShoppingListsFragment : Fragment() {
+class CurrentListsFragment : Fragment() {
 
-    private lateinit var binding: FragmentShoppingListsBinding
+    private lateinit var binding: FragmentCurrentListsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentShoppingListsBinding.inflate(inflater)
+        binding = FragmentCurrentListsBinding.inflate(inflater)
 
         return binding.root
     }
