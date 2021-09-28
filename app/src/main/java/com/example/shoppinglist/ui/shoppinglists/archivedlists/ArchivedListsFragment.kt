@@ -1,21 +1,21 @@
-package com.example.shoppinglist.ui.currentlists
+package com.example.shoppinglist.ui.shoppinglists.archivedlists
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.shoppinglist.databinding.FragmentCurrentListsBinding
+import com.example.shoppinglist.databinding.FragmentArchivedListsBinding
 
-class CurrentListsFragment : Fragment() {
+class ArchivedListsFragment : Fragment() {
 
-    private lateinit var binding: FragmentCurrentListsBinding
+    private lateinit var binding: FragmentArchivedListsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCurrentListsBinding.inflate(inflater)
+        binding = FragmentArchivedListsBinding.inflate(inflater)
 
         return binding.root
     }
