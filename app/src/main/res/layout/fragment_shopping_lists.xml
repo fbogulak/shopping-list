@@ -7,11 +7,11 @@
 
         <variable
             name="viewModel"
-            type="com.example.shoppinglist.ui.shoppinglists.archivedlists.ArchivedListsViewModel" />
+            type="com.example.shoppinglist.ui.shoppinglists.ShoppingListsViewModel" />
     </data>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/archivedListsRecycler"
+        android:id="@+id/shoppingListsRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:shoppingListsListData="@{viewModel.shoppingLists}"
