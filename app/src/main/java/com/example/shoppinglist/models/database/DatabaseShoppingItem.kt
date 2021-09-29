@@ -7,7 +7,7 @@ import com.example.shoppinglist.models.domain.ShoppingItem
 @Entity(tableName = "shopping_item_table")
 data class DatabaseShoppingItem(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Long,
     var name: String,
     var quantity: Int,
     var isBought: Boolean,

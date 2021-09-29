@@ -18,7 +18,7 @@
         android:label="@string/destination_label" >
         <argument
             android:name="arg_list_id"
-            app:argType="integer" />
+            app:argType="long" />
         <argument
             android:name="arg_label"
             app:argType="string" />

@@ -9,7 +9,7 @@ import java.util.*
 @Entity(tableName = "shopping_list_table")
 data class DatabaseShoppingList(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Long,
     var name: String,
     val timestamp: Long,
     var isArchived: Boolean
