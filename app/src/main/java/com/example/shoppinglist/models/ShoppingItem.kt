@@ -1,6 +1,6 @@
 package com.example.shoppinglist.models
 
-data class ShoppingListItem(
+data class ShoppingItem(
     val id: Int,
     var name: String,
     var quantity: Int,
