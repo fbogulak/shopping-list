@@ -6,18 +6,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import com.example.shoppinglist.database.ShoppingDatabase
 import com.example.shoppinglist.databinding.FragmentArchivedListsBinding
+import com.example.shoppinglist.repository.ShoppingRepository
 import com.example.shoppinglist.ui.shoppinglists.adapters.ShoppingListsListAdapter
 
 class ArchivedListsFragment : Fragment() {
-    private val viewModel: ArchivedListsViewModel by viewModels()
+    private lateinit var viewModel: ArchivedListsViewModel
     private lateinit var binding: FragmentArchivedListsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val database = ShoppingDatabase.getInstance(requireContext())
+        val repository = ShoppingRepository(database)
+        viewModel =
+            ViewModelProvider(
+                this,
+                ArchivedListsViewModelFactory(repository)
+            ).get(ArchivedListsViewModel::class.java)
+
         binding = FragmentArchivedListsBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel

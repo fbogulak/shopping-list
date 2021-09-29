@@ -1,7 +1,9 @@
 package com.example.shoppinglist.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.shoppinglist.models.database.DatabaseShoppingList
+import com.example.shoppinglist.models.database.ShoppingListWithItems
 
 @Dao
 interface ShoppingListDao {
@@ -17,4 +19,12 @@ interface ShoppingListDao {
 
     @Query("SELECT * FROM shopping_list_table WHERE id = :id")
     fun getShoppingList(id: Long): DatabaseShoppingList
+
+    @Transaction
+    @Query("SELECT * FROM shopping_list_table WHERE isArchived = 0")
+    fun getCurrentListsWithItems(): LiveData<List<ShoppingListWithItems>>
+
+    @Transaction
+    @Query("SELECT * FROM shopping_list_table WHERE isArchived = 1")
+    fun getArchivedListsWithItems(): LiveData<List<ShoppingListWithItems>>
 }
