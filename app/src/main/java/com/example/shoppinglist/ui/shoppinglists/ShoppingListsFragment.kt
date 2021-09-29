@@ -57,10 +57,6 @@ class ShoppingListsFragment : Fragment() {
     private fun setupRecycler() {
         binding.shoppingListsRecycler.adapter =
             ShoppingListsListAdapter(ShoppingListsListAdapter.ShoppingListListener { shoppingList ->
-                navToListEdit(
-                    shoppingList.id,
-                    getString(R.string.edit_list_title)
-                )
             })
     }
 
@@ -82,7 +78,7 @@ class ShoppingListsFragment : Fragment() {
         }
     }
 
-    private fun navToListEdit(listId: Int, destinationLabel: String) {
+    private fun navToListEdit(listId: Long, destinationLabel: String) {
         findNavController().navigate(
             MainFragmentDirections.actionMainFragmentToListEditFragment(
                 listId, destinationLabel

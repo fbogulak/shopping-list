@@ -1,5 +1,6 @@
 package com.example.shoppinglist.models.domain
 
+import com.example.shoppinglist.models.database.DatabaseShoppingList
 import java.util.*
 
 data class ShoppingList(
@@ -14,3 +15,10 @@ data class ShoppingList(
         items.size
     )
 }
+
+fun ShoppingList.asDatabaseModel() = DatabaseShoppingList(
+    id,
+    name,
+    date.time,
+    isArchived
+)

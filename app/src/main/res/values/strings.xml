@@ -7,4 +7,8 @@
     <string name="destination_label">{arg_label}</string>
     <string name="add_list_title">Add Shopping List</string>
     <string name="edit_list_title">Edit Shopping List</string>
+    <string name="shopping_list_name">Shopping list name</string>
+    <string name="save_changes">Save changes</string>
+    <string name="shopping_list_added">Shopping list added</string>
+    <string name="error_saving_list">Error saving shopping list</string>
 </resources>
