@@ -11,4 +11,6 @@
     <string name="save_changes">Save changes</string>
     <string name="shopping_list_added">Shopping list added</string>
     <string name="error_saving_list">Error saving shopping list</string>
+    <string name="error_loading_items">Error loading items</string>
+    <string name="shopping_item_quantity_format">X%d</string>
 </resources>

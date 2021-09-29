@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_mainFragment_to_listEditFragment"
             app:destination="@id/listEditFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_shoppingItemsFragment"
+            app:destination="@id/shoppingItemsFragment" />
     </fragment>
     <fragment
         android:id="@+id/listEditFragment"
@@ -27,5 +30,16 @@
             app:destination="@id/mainFragment"
             app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/shoppingItemsFragment"
+        android:name="com.example.shoppinglist.ui.shoppingitems.ShoppingItemsFragment"
+        android:label="@string/destination_label">
+        <argument
+            android:name="arg_list_id"
+            app:argType="long" />
+        <argument
+            android:name="arg_label"
+            app:argType="string" />
     </fragment>
 </navigation>

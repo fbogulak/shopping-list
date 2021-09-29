@@ -20,6 +20,10 @@ class ShoppingListsViewModel(private val repository: ShoppingRepository) : ViewM
     private val _navigateToListEdit = MutableLiveData<Boolean?>()
     val navigateToListEdit: LiveData<Boolean?>
         get() = _navigateToListEdit
+    
+    private val _navigateToShoppingItems = MutableLiveData<Boolean?>()
+    val navigateToShoppingItems: LiveData<Boolean?>
+        get() = _navigateToShoppingItems
 
     fun showCurrentLists() {
         _shoppingLists = currentLists
@@ -35,5 +39,13 @@ class ShoppingListsViewModel(private val repository: ShoppingRepository) : ViewM
 
     fun navigateToListEditCompleted() {
         _navigateToListEdit.value = null
+    }
+
+    fun navigateToShoppingItems() {
+        _navigateToShoppingItems.value = true
+    }
+
+    fun navigateToShoppingItemsCompleted() {
+        _navigateToShoppingItems.value = null
     }
 }

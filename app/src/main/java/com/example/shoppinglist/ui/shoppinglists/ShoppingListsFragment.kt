@@ -57,6 +57,10 @@ class ShoppingListsFragment : Fragment() {
     private fun setupRecycler() {
         binding.shoppingListsRecycler.adapter =
             ShoppingListsListAdapter(ShoppingListsListAdapter.ShoppingListListener { shoppingList ->
+                navToShoppingItems(
+                    shoppingList.id,
+                    shoppingList.name
+                )
             })
     }
 
@@ -81,6 +85,14 @@ class ShoppingListsFragment : Fragment() {
     private fun navToListEdit(listId: Long, destinationLabel: String) {
         findNavController().navigate(
             MainFragmentDirections.actionMainFragmentToListEditFragment(
+                listId, destinationLabel
+            )
+        )
+    }
+
+    private fun navToShoppingItems(listId: Long, destinationLabel: String) {
+        findNavController().navigate(
+            MainFragmentDirections.actionMainFragmentToShoppingItemsFragment(
                 listId, destinationLabel
             )
         )
