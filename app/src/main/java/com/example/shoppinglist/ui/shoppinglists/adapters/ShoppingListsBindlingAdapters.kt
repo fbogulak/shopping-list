@@ -4,7 +4,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shoppinglist.R
-import com.example.shoppinglist.models.ShoppingList
+import com.example.shoppinglist.models.domain.ShoppingList
 
 @BindingAdapter("shoppingListsListData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<ShoppingList>?) {

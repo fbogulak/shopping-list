@@ -1,14 +1,16 @@
 package com.example.shoppinglist.ui.shoppinglists.archivedlists
 
 import androidx.lifecycle.ViewModel
-import com.example.shoppinglist.models.ShoppingList
-import com.example.shoppinglist.models.ShoppingItem
+import com.example.shoppinglist.models.domain.ShoppingList
+import com.example.shoppinglist.models.domain.ShoppingItem
+import java.util.*
 
 class ArchivedListsViewModel : ViewModel() {
     val shoppingLists: List<ShoppingList> = listOf(
         ShoppingList(
             1,
             "List 1",
+            Calendar.getInstance().time,
             mutableListOf(
                 ShoppingItem(1, "Grocery 1", 1, false),
                 ShoppingItem(2, "Grocery 2", 2, true),
@@ -19,6 +21,7 @@ class ArchivedListsViewModel : ViewModel() {
         ShoppingList(
             2,
             "List 2",
+            Calendar.getInstance().time,
             mutableListOf(
                 ShoppingItem(11, "Grocery 11", 1, false),
                 ShoppingItem(22, "Grocery 22", 2, true),

@@ -7,7 +7,7 @@
 
         <variable
             name="shoppingList"
-            type="com.example.shoppinglist.models.ShoppingList" />
+            type="com.example.shoppinglist.models.domain.ShoppingList" />
 
         <variable
             name="onClickListener"
