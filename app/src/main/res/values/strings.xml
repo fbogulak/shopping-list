@@ -3,4 +3,8 @@
     <string name="shopping_lists">Shopping Lists</string>
     <string name="archived_shopping_lists">Archived Shopping Lists</string>
     <string name="shopping_list_progress_format">Groceries done %d/%d</string>
+    <string name="add_shopping_list">Add shopping list</string>
+    <string name="destination_label">{arg_label}</string>
+    <string name="add_list_title">Add Shopping List</string>
+    <string name="edit_list_title">Edit Shopping List</string>
 </resources>
