@@ -45,9 +45,16 @@ class ShoppingItemsFragment : BaseFragment() {
 
     private fun setupRecycler() {
         binding.shoppingItemsRecycler.adapter =
-            ShoppingItemsListAdapter(ShoppingItemsListAdapter.ShoppingItemListener { shoppingItem ->
-                viewModel.navToItemEdit(shoppingItem.id, getString(R.string.edit_list_item))
-            })
+            ShoppingItemsListAdapter(
+                if (viewModel.listIsArchived) {
+                    ShoppingItemsListAdapter.ShoppingItemListener {
+                        viewModel.showToast(R.string.unarchive_list_to_edit_items)
+                    }
+                } else {
+                    ShoppingItemsListAdapter.ShoppingItemListener { shoppingItem ->
+                        viewModel.navToItemEdit(shoppingItem.id, getString(R.string.edit_list_item))
+                    }
+                })
     }
 
     private fun setupListeners() {
@@ -65,6 +72,7 @@ class ShoppingItemsFragment : BaseFragment() {
         super.onPrepareOptionsMenu(menu)
         menu.findItem(R.id.archive_list).isVisible = !viewModel.listIsArchived
         menu.findItem(R.id.unarchive_list).isVisible = viewModel.listIsArchived
+        menu.findItem(R.id.rename_list).isVisible = !viewModel.listIsArchived
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

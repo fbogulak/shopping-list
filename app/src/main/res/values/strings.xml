@@ -31,4 +31,5 @@
     <string name="error_archiving_unarchiving_list">Error archiving/unarchiving list</string>
     <string name="unarchive_list">Unarchive list</string>
     <string name="shopping_list_unarchived">Shopping list unarchived</string>
+    <string name="unarchive_list_to_edit_items">Unarchive list to edit items</string>
 </resources>
