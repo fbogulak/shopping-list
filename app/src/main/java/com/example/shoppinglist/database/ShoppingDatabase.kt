@@ -43,6 +43,7 @@ abstract class ShoppingDatabase : RoomDatabase() {
                                             1,
                                             "Tomatoes",
                                             4,
+                                            Calendar.getInstance().time.time,
                                             false,
                                             1
                                         )
@@ -52,6 +53,7 @@ abstract class ShoppingDatabase : RoomDatabase() {
                                             2,
                                             "Bread",
                                             2,
+                                            Calendar.getInstance().time.time,
                                             true,
                                             2
                                         )

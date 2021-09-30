@@ -19,7 +19,7 @@ interface ShoppingItemDao {
     @Query("SELECT * FROM shopping_item_table WHERE id = :id")
     fun getItemById(id: Long): DatabaseShoppingItem
 
-    @Query("SELECT * FROM shopping_item_table WHERE listId = :listId")
+    @Query("SELECT * FROM shopping_item_table WHERE listId = :listId ORDER BY timestamp ASC")
     fun getItemsByListId(listId: Long): LiveData<List<DatabaseShoppingItem>>
 
     @Query("DELETE FROM shopping_item_table WHERE listId = :listId")

@@ -8,10 +8,11 @@ import com.example.shoppinglist.repository.ShoppingRepository
 import com.example.shoppinglist.ui.base.BaseViewModel
 import com.example.shoppinglist.ui.base.NavigationCommand
 import kotlinx.coroutines.launch
+import java.util.*
 
 class ItemEditViewModel(private val repository: ShoppingRepository) : BaseViewModel() {
 
-    var shoppingItem = ShoppingItem(0, "", 0, false, 0)
+    var shoppingItem = ShoppingItem(0, "", 0, Calendar.getInstance().time, false, 0)
     var itemName = MutableLiveData("")
     var itemQuantity = MutableLiveData<Int>()
 
@@ -23,6 +24,7 @@ class ItemEditViewModel(private val repository: ShoppingRepository) : BaseViewMo
         viewModelScope.launch {
             shoppingItem.name = itemName.value ?: ""
             shoppingItem.quantity = itemQuantity.value ?: 0
+            shoppingItem.date =  Calendar.getInstance().time
             val result = if (shoppingItem.id == 0L) {
                 repository.insertItem(shoppingItem)
             } else {
