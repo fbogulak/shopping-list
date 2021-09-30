@@ -41,5 +41,24 @@
         <argument
             android:name="arg_label"
             app:argType="string" />
+        <action
+            android:id="@+id/action_shoppingItemsFragment_to_itemEditFragment"
+            app:destination="@id/itemEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemEditFragment"
+        android:name="com.example.shoppinglist.ui.itemedit.ItemEditFragment"
+        android:label="@string/destination_label">
+        <action
+            android:id="@+id/action_itemEditFragment_to_shoppingItemsFragment"
+            app:destination="@id/shoppingItemsFragment"
+            app:popUpTo="@id/shoppingItemsFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="arg_item_id"
+            app:argType="long" />
+        <argument
+            android:name="arg_label"
+            app:argType="string" />
     </fragment>
 </navigation>

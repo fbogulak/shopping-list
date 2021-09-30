@@ -4,8 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.shoppinglist.R
 import com.example.shoppinglist.databinding.FragmentShoppingItemsBinding
 import com.example.shoppinglist.ui.shoppingitems.adapters.ShoppingItemsListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,6 +24,7 @@ class ShoppingItemsFragment : Fragment() {
 
         setupListId()
         setupRecycler()
+        setupObservers()
 
         return binding.root
     }
@@ -40,8 +42,26 @@ class ShoppingItemsFragment : Fragment() {
     private fun setupRecycler() {
         binding.shoppingItemsRecycler.adapter =
             ShoppingItemsListAdapter(ShoppingItemsListAdapter.ShoppingItemListener { shoppingItem ->
-                Toast.makeText(requireContext(), "${shoppingItem.name} clicked", Toast.LENGTH_SHORT)
-                    .show()
+                navToItemEdit(shoppingItem.id, getString(R.string.edit_list_item))
             })
+    }
+
+    private fun setupObservers() {
+        viewModel.navigateToItemEdit.observe(viewLifecycleOwner) { navigate ->
+            navigate?.let {
+                if (navigate) {
+                    navToItemEdit(0, getString(R.string.add_item_title))
+                    viewModel.navigateToItemEditCompleted()
+                }
+            }
+        }
+    }
+
+    private fun navToItemEdit(listId: Long, destinationLabel: String) {
+        findNavController().navigate(
+            ShoppingItemsFragmentDirections.actionShoppingItemsFragmentToItemEditFragment(
+                listId, destinationLabel
+            )
+        )
     }
 }

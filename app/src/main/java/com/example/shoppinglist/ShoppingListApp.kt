@@ -3,6 +3,7 @@ package com.example.shoppinglist
 import android.app.Application
 import com.example.shoppinglist.database.ShoppingDatabase
 import com.example.shoppinglist.repository.ShoppingRepository
+import com.example.shoppinglist.ui.itemedit.ItemEditViewModel
 import com.example.shoppinglist.ui.listedit.ListEditViewModel
 import com.example.shoppinglist.ui.shoppingitems.ShoppingItemsViewModel
 import com.example.shoppinglist.ui.shoppinglists.ShoppingListsViewModel
@@ -22,6 +23,7 @@ class ShoppingListApp : Application() {
             viewModel { ShoppingListsViewModel(get()) }
             viewModel { ListEditViewModel(get()) }
             viewModel { ShoppingItemsViewModel(get()) }
+            viewModel { ItemEditViewModel(get()) }
         }
 
         startKoin {
