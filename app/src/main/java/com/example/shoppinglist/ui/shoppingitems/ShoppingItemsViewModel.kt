@@ -36,8 +36,9 @@ class ShoppingItemsViewModel(private val repository: ShoppingRepository) : BaseV
         }
     }
 
-    private fun navigateBack() {
-        navigationCommand.value = NavigationCommand.Back
+    private fun navToShoppingLists() {
+        navigationCommand.value =
+            NavigationCommand.To(ShoppingItemsFragmentDirections.actionShoppingItemsFragmentToMainFragment())
     }
 
     fun deleteShoppingList() {
@@ -46,7 +47,7 @@ class ShoppingItemsViewModel(private val repository: ShoppingRepository) : BaseV
                 val result = repository.deleteList(it)
                 result.onSuccess {
                     showToast(R.string.shopping_list_deleted)
-                    navigateBack()
+                    navToShoppingLists()
                 }
                 result.onFailure {
                     val message = it.message
@@ -74,7 +75,7 @@ class ShoppingItemsViewModel(private val repository: ShoppingRepository) : BaseV
                             R.string.shopping_list_unarchived
                         }
                     )
-                    navigateBack()
+                    navToShoppingLists()
                 }
                 result.onFailure {
                     showToast(R.string.error_archiving_unarchiving_list)
