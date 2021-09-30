@@ -1,10 +1,10 @@
 package com.example.shoppinglist.ui.shoppingitems
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -27,6 +27,7 @@ class ShoppingItemsFragment : Fragment() {
         setupListId()
         setupRecycler()
         setupObservers()
+        setHasOptionsMenu(true)
 
         return binding.root
     }
@@ -57,6 +58,17 @@ class ShoppingItemsFragment : Fragment() {
                 }
             }
         }
+        viewModel.showToast.observe(viewLifecycleOwner) {
+            it?.content?.let { content ->
+                val message = when (content) {
+                    is String -> content
+                    is Int -> getString(content)
+                    else -> return@let
+                }
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                viewModel.showToastCompleted()
+            }
+        }
     }
 
     private fun navToItemEdit(listId: Long, destinationLabel: String) {
@@ -65,6 +77,35 @@ class ShoppingItemsFragment : Fragment() {
                 listId, destinationLabel
             )
         )
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.shopping_items_overflow_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.delete_list -> {
+                showDeleteConfirmationDialog()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun showDeleteConfirmationDialog() {
+        AlertDialog.Builder(requireContext()).apply {
+            setMessage(getString(R.string.delete_list_dialog_msg))
+            setPositiveButton(getString(R.string.delete)) { _, _ ->
+                viewModel.deleteShoppingList()
+            }
+            setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
+                dialog?.dismiss()
+            }
+            show()
+        }
     }
 
     override fun onAttach(context: Context) {

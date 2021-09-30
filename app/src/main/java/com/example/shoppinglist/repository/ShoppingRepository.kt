@@ -31,6 +31,20 @@ class ShoppingRepository(private val database: ShoppingDatabase) {
         }
     }
 
+    suspend fun deleteList(listId: Long): Result<Int> = withContext(Dispatchers.IO) {
+        try {
+            database.shoppingItemDao.deleteItemsByListId(listId)
+            val deletedRows = database.shoppingListDao.deleteById(listId)
+            return@withContext if (deletedRows == 1) {
+                Result.success(deletedRows)
+            } else {
+                Result.failure(Throwable())
+            }
+        } catch (e: Exception) {
+            return@withContext Result.failure(e)
+        }
+    }
+
     fun getShoppingItems(listId: Long): LiveData<List<ShoppingItem>> =
         database.shoppingItemDao.getItemsByListId(listId).map { it.asDomainModel() }
 }

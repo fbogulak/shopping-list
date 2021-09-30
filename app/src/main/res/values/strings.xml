@@ -16,6 +16,12 @@
     <string name="save_changes">Save changes</string>
     <string name="shopping_list_added">Shopping list added</string>
     <string name="error_saving_list">Error saving shopping list</string>
+    <string name="shopping_list_deleted">Shopping list deleted</string>
+    <string name="error_deleting_list">Error deleting shopping list</string>
     <string name="error_loading_items">Error loading items</string>
     <string name="shopping_item_quantity_format">X%d</string>
+    <string name="delete_list">Delete list</string>
+    <string name="delete_list_dialog_msg">Delete this shopping list and all related items?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
 </resources>

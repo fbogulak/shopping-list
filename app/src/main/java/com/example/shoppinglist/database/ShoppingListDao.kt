@@ -27,4 +27,7 @@ interface ShoppingListDao {
     @Transaction
     @Query("SELECT * FROM shopping_list_table WHERE isArchived = 1")
     fun getArchivedListsWithItems(): LiveData<List<ShoppingListWithItems>>
+
+    @Query("DELETE FROM shopping_list_table WHERE id = :id")
+    fun deleteById(id: Long): Int
 }
