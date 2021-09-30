@@ -1,45 +1,19 @@
 package com.example.shoppinglist.ui.itemedit
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.shoppinglist.models.domain.ShoppingItem
 import com.example.shoppinglist.repository.ShoppingRepository
-import com.example.shoppinglist.utils.ToastMessage
+import com.example.shoppinglist.ui.base.BaseViewModel
+import com.example.shoppinglist.ui.base.NavigationCommand
 
-class ItemEditViewModel(private val repository: ShoppingRepository) : ViewModel() {
+class ItemEditViewModel(private val repository: ShoppingRepository) : BaseViewModel() {
 
     val shoppingItem = ShoppingItem(0, "", 1, false)
 
-    private val _navigateToShoppingItems = MutableLiveData<Boolean?>()
-    val navigateToShoppingItems: LiveData<Boolean?>
-        get() = _navigateToShoppingItems
-
-    private val _showToast = MutableLiveData<ToastMessage<*>?>()
-    val showToast: LiveData<ToastMessage<*>?>
-        get() = _showToast
-
-    fun navigateToShoppingItems() {
-        _navigateToShoppingItems.value = true
-    }
-
-    fun navigateToShoppingItemsCompleted() {
-        _navigateToShoppingItems.value = null
-    }
-
-    private fun showToast(message: String) {
-        _showToast.value = ToastMessage.from(message)
-    }
-
-    private fun showToast(messageResId: Int) {
-        _showToast.value = ToastMessage.from(messageResId)
-    }
-
-    fun showToastCompleted() {
-        _showToast.value = null
+    private fun navigateBack() {
+        navigationCommand.value = NavigationCommand.Back
     }
 
     fun saveShoppingItem() {
-        navigateToShoppingItems()
+        navigateBack()
     }
 }

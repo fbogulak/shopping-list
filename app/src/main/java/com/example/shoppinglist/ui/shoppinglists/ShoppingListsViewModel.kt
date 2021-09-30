@@ -1,13 +1,14 @@
 package com.example.shoppinglist.ui.shoppinglists
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.example.shoppinglist.models.domain.ShoppingList
 import com.example.shoppinglist.repository.ShoppingRepository
+import com.example.shoppinglist.ui.base.BaseViewModel
+import com.example.shoppinglist.ui.base.NavigationCommand
+import com.example.shoppinglist.ui.main.MainFragmentDirections
 
-class ShoppingListsViewModel(private val repository: ShoppingRepository) : ViewModel() {
+class ShoppingListsViewModel(private val repository: ShoppingRepository) : BaseViewModel() {
 
     private val currentLists by lazy { repository.currentLists }
     private val archivedLists by lazy { repository.archivedLists }
@@ -17,14 +18,6 @@ class ShoppingListsViewModel(private val repository: ShoppingRepository) : ViewM
     val shoppingLists: LiveData<List<ShoppingList>>
         get() = _shoppingLists
 
-    private val _navigateToListEdit = MutableLiveData<Boolean?>()
-    val navigateToListEdit: LiveData<Boolean?>
-        get() = _navigateToListEdit
-    
-    private val _navigateToShoppingItems = MutableLiveData<Boolean?>()
-    val navigateToShoppingItems: LiveData<Boolean?>
-        get() = _navigateToShoppingItems
-
     fun showCurrentLists() {
         _shoppingLists = currentLists
     }
@@ -33,19 +26,20 @@ class ShoppingListsViewModel(private val repository: ShoppingRepository) : ViewM
         _shoppingLists = archivedLists
     }
 
-    fun navigateToListEdit() {
-        _navigateToListEdit.value = true
+    fun navToListEdit(listId: Long, destinationLabel: String) {
+        navigationCommand.value = NavigationCommand.To(
+            MainFragmentDirections.actionMainFragmentToListEditFragment(
+                listId,
+                destinationLabel
+            )
+        )
     }
 
-    fun navigateToListEditCompleted() {
-        _navigateToListEdit.value = null
-    }
-
-    fun navigateToShoppingItems() {
-        _navigateToShoppingItems.value = true
-    }
-
-    fun navigateToShoppingItemsCompleted() {
-        _navigateToShoppingItems.value = null
+    fun navToShoppingItems(listId: Long, destinationLabel: String) {
+        navigationCommand.value = NavigationCommand.To(
+            MainFragmentDirections.actionMainFragmentToShoppingItemsFragment(
+                listId, destinationLabel
+            )
+        )
     }
 }

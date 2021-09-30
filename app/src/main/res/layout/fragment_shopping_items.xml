@@ -28,7 +28,6 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:contentDescription="@string/add_shopping_item"
-            android:onClick="@{() -> viewModel.navigateToItemEdit()}"
             app:srcCompat="@drawable/ic_add" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

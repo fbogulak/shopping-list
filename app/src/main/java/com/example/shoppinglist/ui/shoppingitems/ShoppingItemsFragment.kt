@@ -4,18 +4,17 @@ import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.shoppinglist.R
 import com.example.shoppinglist.databinding.FragmentShoppingItemsBinding
+import com.example.shoppinglist.ui.base.BaseFragment
 import com.example.shoppinglist.ui.shoppingitems.adapters.ShoppingItemsListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ShoppingItemsFragment : Fragment() {
+class ShoppingItemsFragment : BaseFragment() {
 
-    private val viewModel: ShoppingItemsViewModel by viewModel()
+    override val viewModel: ShoppingItemsViewModel by viewModel()
     private lateinit var binding: FragmentShoppingItemsBinding
 
     override fun onCreateView(
@@ -26,7 +25,7 @@ class ShoppingItemsFragment : Fragment() {
 
         setupListId()
         setupRecycler()
-        setupObservers()
+        setupListeners()
         setHasOptionsMenu(true)
 
         return binding.root
@@ -45,40 +44,15 @@ class ShoppingItemsFragment : Fragment() {
     private fun setupRecycler() {
         binding.shoppingItemsRecycler.adapter =
             ShoppingItemsListAdapter(ShoppingItemsListAdapter.ShoppingItemListener { shoppingItem ->
-                navToItemEdit(shoppingItem.id, getString(R.string.edit_list_item))
+                viewModel.navToItemEdit(shoppingItem.id, getString(R.string.edit_list_item))
             })
     }
 
-    private fun setupObservers() {
-        viewModel.navigateToItemEdit.observe(viewLifecycleOwner) { navigate ->
-            navigate?.let {
-                if (navigate) {
-                    navToItemEdit(0, getString(R.string.add_item_title))
-                    viewModel.navigateToItemEditCompleted()
-                }
-            }
-        }
-        viewModel.showToast.observe(viewLifecycleOwner) {
-            it?.content?.let { content ->
-                val message = when (content) {
-                    is String -> content
-                    is Int -> getString(content)
-                    else -> return@let
-                }
-                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-                viewModel.showToastCompleted()
-            }
+    private fun setupListeners(){
+        binding.addItemFab.setOnClickListener {
+            viewModel.navToItemEdit(0, getString(R.string.add_item_title))
         }
     }
-
-    private fun navToItemEdit(listId: Long, destinationLabel: String) {
-        findNavController().navigate(
-            ShoppingItemsFragmentDirections.actionShoppingItemsFragmentToItemEditFragment(
-                listId, destinationLabel
-            )
-        )
-    }
-
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)

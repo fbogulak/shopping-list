@@ -4,20 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.shoppinglist.R
 import com.example.shoppinglist.databinding.FragmentShoppingListsBinding
-import com.example.shoppinglist.ui.main.MainFragmentDirections
+import com.example.shoppinglist.ui.base.BaseFragment
 import com.example.shoppinglist.ui.shoppinglists.adapters.ShoppingListsListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val ARG_POSITION = "position"
 
-class ShoppingListsFragment : Fragment() {
+class ShoppingListsFragment : BaseFragment() {
     private var position: Int? = null
 
-    private val viewModel: ShoppingListsViewModel by viewModel()
+    override val viewModel: ShoppingListsViewModel by viewModel()
     private lateinit var binding: FragmentShoppingListsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +34,7 @@ class ShoppingListsFragment : Fragment() {
 
         setupRecycler()
         setupFab()
-        setupObservers()
+        setupListeners()
 
         return binding.root
     }
@@ -57,7 +55,7 @@ class ShoppingListsFragment : Fragment() {
     private fun setupRecycler() {
         binding.shoppingListsRecycler.adapter =
             ShoppingListsListAdapter(ShoppingListsListAdapter.ShoppingListListener { shoppingList ->
-                navToShoppingItems(
+                viewModel.navToShoppingItems(
                     shoppingList.id,
                     shoppingList.name
                 )
@@ -71,31 +69,10 @@ class ShoppingListsFragment : Fragment() {
         }
     }
 
-    private fun setupObservers() {
-        viewModel.navigateToListEdit.observe(viewLifecycleOwner) { navigate ->
-            navigate?.let {
-                if (navigate) {
-                    navToListEdit(0, getString(R.string.add_list_title))
-                    viewModel.navigateToListEditCompleted()
-                }
-            }
+    private fun setupListeners(){
+        binding.addListFab.setOnClickListener {
+            viewModel.navToListEdit(0, getString(R.string.add_list_title))
         }
-    }
-
-    private fun navToListEdit(listId: Long, destinationLabel: String) {
-        findNavController().navigate(
-            MainFragmentDirections.actionMainFragmentToListEditFragment(
-                listId, destinationLabel
-            )
-        )
-    }
-
-    private fun navToShoppingItems(listId: Long, destinationLabel: String) {
-        findNavController().navigate(
-            MainFragmentDirections.actionMainFragmentToShoppingItemsFragment(
-                listId, destinationLabel
-            )
-        )
     }
 
     companion object {
