@@ -25,10 +25,10 @@ class ListEditViewModel(private val repository: ShoppingRepository) : BaseViewMo
 
     fun saveShoppingList() {
         viewModelScope.launch {
+            shoppingList.name = listName.value ?: ""
             val result = if (shoppingList.id == 0L) {
                 repository.insertList(shoppingList)
             } else {
-                shoppingList.name = listName.value ?: ""
                 repository.updateListName(shoppingList.id, shoppingList.name)
             }
             result.onSuccess {
