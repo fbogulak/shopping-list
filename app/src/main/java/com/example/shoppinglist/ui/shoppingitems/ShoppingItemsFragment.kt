@@ -52,14 +52,24 @@ class ShoppingItemsFragment : BaseFragment() {
                     }
                 } else {
                     ShoppingItemsListAdapter.ShoppingItemListener { shoppingItem ->
-                        viewModel.navToItemEdit(shoppingItem.id, getString(R.string.edit_list_item))
+                        viewModel.navToItemEdit(
+                            shoppingItem.id,
+                            shoppingItem.listId,
+                            getString(R.string.edit_list_item)
+                        )
                     }
                 })
     }
 
     private fun setupListeners() {
         binding.addItemFab.setOnClickListener {
-            viewModel.navToItemEdit(0, getString(R.string.add_item_title))
+            viewModel.listId.value?.let { listId ->
+                viewModel.navToItemEdit(
+                    0,
+                    listId,
+                    getString(R.string.add_item_title)
+                )
+            }
         }
     }
 

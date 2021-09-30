@@ -11,7 +11,7 @@ data class DatabaseShoppingItem(
     var name: String,
     var quantity: Int,
     var isBought: Boolean,
-    val listId: Int
+    val listId: Long
 )
 
 fun List<DatabaseShoppingItem>.asDomainModel(): List<ShoppingItem> {
@@ -20,7 +20,16 @@ fun List<DatabaseShoppingItem>.asDomainModel(): List<ShoppingItem> {
             it.id,
             it.name,
             it.quantity,
-            it.isBought
+            it.isBought,
+            it.listId
         )
     }
 }
+
+fun DatabaseShoppingItem.asDomainModel() = ShoppingItem(
+    id,
+    name,
+    quantity,
+    isBought,
+    listId
+)

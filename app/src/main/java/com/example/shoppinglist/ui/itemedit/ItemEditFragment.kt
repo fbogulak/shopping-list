@@ -19,6 +19,7 @@ class ItemEditFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         setupBinding(inflater)
+        setupShoppingItem()
 
         return binding.root
     }
@@ -27,5 +28,15 @@ class ItemEditFragment : BaseFragment() {
         binding = FragmentItemEditBinding.inflate(inflater)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+    }
+
+    private fun setupShoppingItem() {
+        val itemId = ItemEditFragmentArgs.fromBundle(requireArguments()).argItemId
+        val listId = ItemEditFragmentArgs.fromBundle(requireArguments()).argListId
+        if (itemId > 0) {
+            viewModel.shoppingItem.id = itemId
+            viewModel.getItemFromDb()
+        }
+        viewModel.shoppingItem.listId = listId
     }
 }

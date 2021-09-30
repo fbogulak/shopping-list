@@ -17,6 +17,9 @@
     <string name="shopping_list_added">Shopping list added</string>
     <string name="shopping_list_updated">Shopping list updated</string>
     <string name="error_saving_list">Error saving shopping list</string>
+    <string name="shopping_item_added">Shopping item added</string>
+    <string name="shopping_item_updated">Shopping item updated</string>
+    <string name="error_saving_item">Error saving shopping item</string>
     <string name="shopping_list_deleted">Shopping list deleted</string>
     <string name="error_deleting_list">Error deleting shopping list</string>
     <string name="error_loading_items">Error loading items</string>

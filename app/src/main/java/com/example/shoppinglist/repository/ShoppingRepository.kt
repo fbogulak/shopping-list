@@ -63,11 +63,33 @@ class ShoppingRepository(private val database: ShoppingDatabase) {
             }
         }
 
-    suspend fun setListIsArchived(listId: Long, archiveList: Boolean): Result<Boolean> = withContext(Dispatchers.IO) {
+    suspend fun setListIsArchived(listId: Long, archiveList: Boolean): Result<Boolean> =
+        withContext(Dispatchers.IO) {
+            try {
+                val updatedRows =
+                    database.shoppingListDao.setListIsArchivedById(listId, archiveList)
+                return@withContext if (updatedRows == 1) {
+                    Result.success(archiveList)
+                } else {
+                    Result.failure(Throwable())
+                }
+            } catch (e: Exception) {
+                return@withContext Result.failure(e)
+            }
+        }
+
+    fun getShoppingItems(listId: Long): LiveData<List<ShoppingItem>> =
+        database.shoppingItemDao.getItemsByListId(listId).map { it.asDomainModel() }
+
+    suspend fun getItem(itemId: Long): ShoppingItem = withContext(Dispatchers.IO) {
+        return@withContext database.shoppingItemDao.getItemById(itemId).asDomainModel()
+    }
+
+    suspend fun insertItem(shoppingItem: ShoppingItem): Result<Long> = withContext(Dispatchers.IO) {
         try {
-            val updatedRows = database.shoppingListDao.setListIsArchivedById(listId, archiveList)
-            return@withContext if (updatedRows == 1) {
-                Result.success(archiveList)
+            val newId = database.shoppingItemDao.insert(shoppingItem.asDatabaseModel())
+            return@withContext if (newId > 0L) {
+                Result.success(newId)
             } else {
                 Result.failure(Throwable())
             }
@@ -76,6 +98,17 @@ class ShoppingRepository(private val database: ShoppingDatabase) {
         }
     }
 
-    fun getShoppingItems(listId: Long): LiveData<List<ShoppingItem>> =
-        database.shoppingItemDao.getItemsByListId(listId).map { it.asDomainModel() }
+    suspend fun updateItem(shoppingItem: ShoppingItem): Result<Int> = withContext(Dispatchers.IO) {
+        try {
+            val updatedRows = database.shoppingItemDao.update(shoppingItem.asDatabaseModel())
+            return@withContext if (updatedRows == 1) {
+                Result.success(updatedRows)
+            } else {
+                Result.failure(Throwable())
+            }
+        } catch (e: Exception) {
+            return@withContext Result.failure(e)
+        }
+    }
+
 }

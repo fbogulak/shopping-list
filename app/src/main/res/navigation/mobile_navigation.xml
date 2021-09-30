@@ -70,6 +70,9 @@
             android:name="arg_item_id"
             app:argType="long" />
         <argument
+            android:name="arg_list_id"
+            app:argType="long" />
+        <argument
             android:name="arg_label"
             app:argType="string" />
     </fragment>

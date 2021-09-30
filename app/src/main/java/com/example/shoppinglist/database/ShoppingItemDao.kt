@@ -17,7 +17,7 @@ interface ShoppingItemDao {
     fun delete(shoppingItem: DatabaseShoppingItem): Int
 
     @Query("SELECT * FROM shopping_item_table WHERE id = :id")
-    fun getShoppingItem(id: Long): DatabaseShoppingItem
+    fun getItemById(id: Long): DatabaseShoppingItem
 
     @Query("SELECT * FROM shopping_item_table WHERE listId = :listId")
     fun getItemsByListId(listId: Long): LiveData<List<DatabaseShoppingItem>>

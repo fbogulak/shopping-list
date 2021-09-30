@@ -15,10 +15,11 @@ class ShoppingItemsViewModel(private val repository: ShoppingRepository) : BaseV
     var listIsArchived = false
     val shoppingItems = listId.switchMap { repository.getShoppingItems(it) }
 
-    fun navToItemEdit(itemId: Long, destinationLabel: String) {
+    fun navToItemEdit(itemId: Long, listId: Long, destinationLabel: String) {
         navigationCommand.value = NavigationCommand.To(
             ShoppingItemsFragmentDirections.actionShoppingItemsFragmentToItemEditFragment(
                 itemId,
+                listId,
                 destinationLabel
             )
         )
