@@ -1,9 +1,11 @@
 package com.example.shoppinglist.ui.shoppingitems
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.shoppinglist.R
@@ -63,5 +65,16 @@ class ShoppingItemsFragment : Fragment() {
                 listId, destinationLabel
             )
         )
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().navigate(ShoppingItemsFragmentDirections.actionShoppingItemsFragmentToMainFragment())
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 }

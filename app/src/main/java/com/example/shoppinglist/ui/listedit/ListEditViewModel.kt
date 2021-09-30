@@ -16,20 +16,20 @@ class ListEditViewModel(private val repository: ShoppingRepository) : ViewModel(
 
     val shoppingList = ShoppingList(0, "", Calendar.getInstance().time, false)
 
-    private val _navigateToShoppingLists = MutableLiveData<Boolean?>()
-    val navigateToShoppingLists: LiveData<Boolean?>
-        get() = _navigateToShoppingLists
+    private val _navigateToShoppingItems = MutableLiveData<ShoppingList?>()
+    val navigateToShoppingItems: LiveData<ShoppingList?>
+        get() = _navigateToShoppingItems
 
     private val _showToast = MutableLiveData<ToastMessage<*>?>()
     val showToast: LiveData<ToastMessage<*>?>
         get() = _showToast
 
-    fun navigateToShoppingLists() {
-        _navigateToShoppingLists.value = true
+    fun navigateToShoppingItems(shoppingList: ShoppingList) {
+        _navigateToShoppingItems.value = shoppingList
     }
 
-    fun navigateToShoppingListsCompleted() {
-        _navigateToShoppingLists.value = null
+    fun navigateToShoppingItemsCompleted() {
+        _navigateToShoppingItems.value = null
     }
 
     private fun showToast(message: String) {
@@ -52,8 +52,9 @@ class ListEditViewModel(private val repository: ShoppingRepository) : ViewModel(
             } else {
                 repository.insertList(shoppingList)//TODO: update not insert!
             }
-            result.onSuccess {
-                showToast(it)
+            result.onSuccess { newId ->
+                showToast(R.string.shopping_list_added)
+                navigateToShoppingItems(shoppingList.apply { id = newId })
             }
             result.onFailure {
                 val message = it.message
@@ -63,7 +64,6 @@ class ListEditViewModel(private val repository: ShoppingRepository) : ViewModel(
                     showToast(R.string.error_saving_list)
                 }
             }
-            navigateToShoppingLists()
         }
     }
 }

@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.shoppinglist.databinding.ActivityMainBinding
+import com.example.shoppinglist.ui.shoppingitems.ShoppingItemsFragmentDirections
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +25,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = this.findNavController(R.id.nav_host_fragment)
-        return navController.navigateUp()
+        return when (navController.currentDestination?.id) {
+            R.id.shoppingItemsFragment -> {
+                navController.navigate(ShoppingItemsFragmentDirections.actionShoppingItemsFragmentToMainFragment())
+                true
+            }
+            else -> navController.navigateUp()
+        }
     }
 }

@@ -2,7 +2,6 @@ package com.example.shoppinglist.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
-import com.example.shoppinglist.R
 import com.example.shoppinglist.database.ShoppingDatabase
 import com.example.shoppinglist.models.database.asDomainModel
 import com.example.shoppinglist.models.domain.ShoppingItem
@@ -19,11 +18,11 @@ class ShoppingRepository(private val database: ShoppingDatabase) {
         database.shoppingListDao.getArchivedListsWithItems().map { it.asDomainModel() }
     }
 
-    suspend fun insertList(shoppingList: ShoppingList): Result<Int> = withContext(Dispatchers.IO) {
+    suspend fun insertList(shoppingList: ShoppingList): Result<Long> = withContext(Dispatchers.IO) {
         try {
             val newId = database.shoppingListDao.insert(shoppingList.asDatabaseModel())
             return@withContext if (newId > 0L) {
-                Result.success(R.string.shopping_list_added)
+                Result.success(newId)
             } else {
                 Result.failure(Throwable())
             }

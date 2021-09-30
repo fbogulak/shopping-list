@@ -34,12 +34,11 @@ class ListEditFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.navigateToShoppingLists.observe(viewLifecycleOwner) { navigate ->
-            navigate?.let {
-                if (navigate) {
-                    navToShoppingLists()
-                    viewModel.navigateToShoppingListsCompleted()
-                }
+        viewModel.navigateToShoppingItems.observe(viewLifecycleOwner) { shoppingList ->
+            shoppingList?.let {
+                navToShoppingItems(it.id, it.name)
+                viewModel.navigateToShoppingItemsCompleted()
+
             }
         }
         viewModel.showToast.observe(viewLifecycleOwner) {
@@ -55,7 +54,12 @@ class ListEditFragment : Fragment() {
         }
     }
 
-    private fun navToShoppingLists() {
-        findNavController().navigate(ListEditFragmentDirections.actionListEditFragmentToMainFragment())
+    private fun navToShoppingItems(listId: Long, destinationLabel: String) {
+        findNavController().navigate(
+            ListEditFragmentDirections.actionListEditFragmentToShoppingItemsFragment(
+                listId,
+                destinationLabel
+            )
+        )
     }
 }

@@ -4,7 +4,7 @@ import com.example.shoppinglist.models.database.DatabaseShoppingList
 import java.util.*
 
 data class ShoppingList(
-    val id: Long,
+    var id: Long,
     var name: String,
     val date: Date,
     var isArchived: Boolean,
