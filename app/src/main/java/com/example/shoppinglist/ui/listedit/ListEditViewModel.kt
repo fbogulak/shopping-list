@@ -1,6 +1,5 @@
 package com.example.shoppinglist.ui.listedit
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.shoppinglist.R
 import com.example.shoppinglist.models.domain.ShoppingList
@@ -23,7 +22,6 @@ class ListEditViewModel(private val repository: ShoppingRepository) : BaseViewMo
     }
 
     fun saveShoppingList() {
-        Log.v("ListEditViewModel", shoppingList.toString())
         viewModelScope.launch {
             val result = if (shoppingList.id == 0L) {
                 repository.insertList(shoppingList)
