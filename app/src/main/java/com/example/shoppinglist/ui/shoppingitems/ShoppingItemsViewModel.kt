@@ -45,6 +45,7 @@ class ShoppingItemsViewModel(private val repository: ShoppingRepository) : BaseV
                 val result = repository.deleteList(it)
                 result.onSuccess {
                     showToast(R.string.shopping_list_deleted)
+                    navigateBack()
                 }
                 result.onFailure {
                     val message = it.message
