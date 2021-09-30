@@ -23,7 +23,7 @@ class ShoppingItemsFragment : BaseFragment() {
     ): View {
         setupBinding(inflater)
 
-        setupListId()
+        setupList()
         setupRecycler()
         setupListeners()
         setHasOptionsMenu(true)
@@ -37,8 +37,10 @@ class ShoppingItemsFragment : BaseFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
     }
 
-    private fun setupListId() {
+    private fun setupList() {
         viewModel.listId.value = ShoppingItemsFragmentArgs.fromBundle(requireArguments()).argListId
+        viewModel.listIsArchived =
+            ShoppingItemsFragmentArgs.fromBundle(requireArguments()).argListIsArchived
     }
 
     private fun setupRecycler() {
@@ -48,7 +50,7 @@ class ShoppingItemsFragment : BaseFragment() {
             })
     }
 
-    private fun setupListeners(){
+    private fun setupListeners() {
         binding.addItemFab.setOnClickListener {
             viewModel.navToItemEdit(0, getString(R.string.add_item_title))
         }
@@ -59,6 +61,12 @@ class ShoppingItemsFragment : BaseFragment() {
         inflater.inflate(R.menu.shopping_items_overflow_menu, menu)
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        menu.findItem(R.id.archive_list).isVisible = !viewModel.listIsArchived
+        menu.findItem(R.id.unarchive_list).isVisible = viewModel.listIsArchived
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.delete_list -> {
@@ -67,6 +75,14 @@ class ShoppingItemsFragment : BaseFragment() {
             }
             R.id.rename_list -> {
                 viewModel.navToListEdit(getString(R.string.rename_list_title))
+                return true
+            }
+            R.id.archive_list -> {
+                viewModel.setListArchived(true)
+                return true
+            }
+            R.id.unarchive_list -> {
+                viewModel.setListArchived(false)
                 return true
             }
         }

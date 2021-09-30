@@ -18,7 +18,7 @@ class ListEditViewModel(private val repository: ShoppingRepository) : BaseViewMo
     private fun navToShoppingItems() {
         navigationCommand.value = NavigationCommand.To(
             ListEditFragmentDirections.actionListEditFragmentToShoppingItemsFragment(
-                shoppingList.id, shoppingList.name
+                shoppingList.id, shoppingList.isArchived, shoppingList.name
             )
         )
     }

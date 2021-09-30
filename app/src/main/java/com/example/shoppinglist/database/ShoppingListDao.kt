@@ -36,4 +36,7 @@ interface ShoppingListDao {
 
     @Query("UPDATE shopping_list_table SET name = :newName WHERE id = :id")
     fun updateListName(id: Long, newName: String): Int
+
+    @Query("UPDATE shopping_list_table SET isArchived = :archive WHERE id = :id")
+    fun setListIsArchivedById(id: Long, archive: Boolean): Int
 }

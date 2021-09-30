@@ -57,6 +57,7 @@ class ShoppingListsFragment : BaseFragment() {
             ShoppingListsListAdapter(ShoppingListsListAdapter.ShoppingListListener { shoppingList ->
                 viewModel.navToShoppingItems(
                     shoppingList.id,
+                    shoppingList.isArchived,
                     shoppingList.name
                 )
             })

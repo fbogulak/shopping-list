@@ -3,6 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/archive_list"
+        android:icon="@drawable/ic_archive"
+        android:title="@string/archive_list"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/unarchive_list"
+        android:icon="@drawable/ic_unarchive"
+        android:title="@string/unarchive_list"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/rename_list"
         android:title="@string/rename_list"
         app:showAsAction="never" />

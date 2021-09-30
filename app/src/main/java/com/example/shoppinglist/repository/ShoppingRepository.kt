@@ -61,8 +61,20 @@ class ShoppingRepository(private val database: ShoppingDatabase) {
             } catch (e: Exception) {
                 return@withContext Result.failure(e)
             }
-
         }
+
+    suspend fun setListIsArchived(listId: Long, archiveList: Boolean): Result<Boolean> = withContext(Dispatchers.IO) {
+        try {
+            val updatedRows = database.shoppingListDao.setListIsArchivedById(listId, archiveList)
+            return@withContext if (updatedRows == 1) {
+                Result.success(archiveList)
+            } else {
+                Result.failure(Throwable())
+            }
+        } catch (e: Exception) {
+            return@withContext Result.failure(e)
+        }
+    }
 
     fun getShoppingItems(listId: Long): LiveData<List<ShoppingItem>> =
         database.shoppingItemDao.getItemsByListId(listId).map { it.asDomainModel() }

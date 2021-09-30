@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.shoppinglist.ui.main.MainFragment"
-        android:label="@string/app_name" >
+        android:label="@string/app_name">
         <action
             android:id="@+id/action_mainFragment_to_listEditFragment"
             app:destination="@id/listEditFragment" />
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/listEditFragment"
         android:name="com.example.shoppinglist.ui.listedit.ListEditFragment"
-        android:label="@string/destination_label" >
+        android:label="@string/destination_label">
         <argument
             android:name="arg_list_id"
             app:argType="long" />
@@ -39,6 +39,9 @@
             android:name="arg_list_id"
             app:argType="long" />
         <argument
+            android:name="arg_list_is_archived"
+            app:argType="boolean" />
+        <argument
             android:name="arg_label"
             app:argType="string" />
         <action
@@ -52,6 +55,7 @@
         <action
             android:id="@+id/action_shoppingItemsFragment_to_listEditFragment"
             app:destination="@id/listEditFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/itemEditFragment"

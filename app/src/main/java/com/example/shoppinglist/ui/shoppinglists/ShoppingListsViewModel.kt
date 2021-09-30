@@ -35,10 +35,10 @@ class ShoppingListsViewModel(private val repository: ShoppingRepository) : BaseV
         )
     }
 
-    fun navToShoppingItems(listId: Long, destinationLabel: String) {
+    fun navToShoppingItems(listId: Long, listIsArchived: Boolean, destinationLabel: String) {
         navigationCommand.value = NavigationCommand.To(
             MainFragmentDirections.actionMainFragmentToShoppingItemsFragment(
-                listId, destinationLabel
+                listId, listIsArchived, destinationLabel
             )
         )
     }
