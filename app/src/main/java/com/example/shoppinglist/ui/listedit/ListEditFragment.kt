@@ -20,6 +20,8 @@ class ListEditFragment : BaseFragment() {
     ): View {
         setupBinding(inflater)
 
+        setupShoppingList()
+
         return binding.root
     }
 
@@ -27,5 +29,13 @@ class ListEditFragment : BaseFragment() {
         binding = FragmentListEditBinding.inflate(inflater)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+    }
+
+    private fun setupShoppingList() {
+        val listId = ListEditFragmentArgs.fromBundle(requireArguments()).argListId
+        if (listId > 0) {
+            viewModel.shoppingList.id = listId
+            viewModel.getListNameFromDb()
+        }
     }
 }

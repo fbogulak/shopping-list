@@ -49,6 +49,9 @@
             app:destination="@id/mainFragment"
             app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_shoppingItemsFragment_to_listEditFragment"
+            app:destination="@id/listEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/itemEditFragment"

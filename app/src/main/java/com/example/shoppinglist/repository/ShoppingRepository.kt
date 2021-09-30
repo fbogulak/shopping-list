@@ -45,6 +45,25 @@ class ShoppingRepository(private val database: ShoppingDatabase) {
         }
     }
 
+    suspend fun getListName(listId: Long): String = withContext(Dispatchers.IO) {
+        return@withContext database.shoppingListDao.getListNameById(listId)
+    }
+
+    suspend fun updateListName(listId: Long, newName: String): Result<Int> =
+        withContext(Dispatchers.IO) {
+            try {
+                val updatedRows = database.shoppingListDao.updateListName(listId, newName)
+                return@withContext if (updatedRows == 1) {
+                    Result.success(updatedRows)
+                } else {
+                    Result.failure(Throwable())
+                }
+            } catch (e: Exception) {
+                return@withContext Result.failure(e)
+            }
+
+        }
+
     fun getShoppingItems(listId: Long): LiveData<List<ShoppingItem>> =
         database.shoppingItemDao.getItemsByListId(listId).map { it.asDomainModel() }
 }

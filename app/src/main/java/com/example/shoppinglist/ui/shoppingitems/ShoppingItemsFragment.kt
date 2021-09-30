@@ -65,6 +65,10 @@ class ShoppingItemsFragment : BaseFragment() {
                 showDeleteConfirmationDialog()
                 return true
             }
+            R.id.rename_list -> {
+                viewModel.navToListEdit(getString(R.string.rename_list_title))
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }

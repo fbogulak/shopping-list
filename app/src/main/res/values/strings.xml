@@ -8,13 +8,14 @@
     <string name="destination_label">{arg_label}</string>
     <string name="add_list_title">Add Shopping List</string>
     <string name="add_item_title">Add Shopping Item</string>
-    <string name="edit_list_title">Edit Shopping List</string>
+    <string name="rename_list_title">Rename Shopping List</string>
     <string name="edit_list_item">Edit Shopping Item</string>
     <string name="shopping_list_name">Shopping list name</string>
     <string name="name">Name</string>
     <string name="quantity">Quantity</string>
     <string name="save_changes">Save changes</string>
     <string name="shopping_list_added">Shopping list added</string>
+    <string name="shopping_list_updated">Shopping list updated</string>
     <string name="error_saving_list">Error saving shopping list</string>
     <string name="shopping_list_deleted">Shopping list deleted</string>
     <string name="error_deleting_list">Error deleting shopping list</string>
@@ -24,4 +25,5 @@
     <string name="delete_list_dialog_msg">Delete this shopping list and all related items?</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
+    <string name="rename_list">Rename list</string>
 </resources>

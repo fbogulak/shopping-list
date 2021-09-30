@@ -23,6 +23,17 @@ class ShoppingItemsViewModel(private val repository: ShoppingRepository) : BaseV
         )
     }
 
+    fun navToListEdit(destinationLabel: String) {
+        listId.value?.let { listId ->
+            navigationCommand.value = NavigationCommand.To(
+                ShoppingItemsFragmentDirections.actionShoppingItemsFragmentToListEditFragment(
+                    listId,
+                    destinationLabel
+                )
+            )
+        }
+    }
+
     fun deleteShoppingList() {
         listId.value?.let {
             viewModelScope.launch {

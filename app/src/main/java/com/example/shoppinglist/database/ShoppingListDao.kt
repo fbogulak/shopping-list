@@ -30,4 +30,10 @@ interface ShoppingListDao {
 
     @Query("DELETE FROM shopping_list_table WHERE id = :id")
     fun deleteById(id: Long): Int
+
+    @Query("SELECT name FROM shopping_list_table WHERE id = :id")
+    fun getListNameById(id: Long): String
+
+    @Query("UPDATE shopping_list_table SET name = :newName WHERE id = :id")
+    fun updateListName(id: Long, newName: String): Int
 }

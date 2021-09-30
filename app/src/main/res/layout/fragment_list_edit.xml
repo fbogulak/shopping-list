@@ -41,7 +41,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textCapSentences|textAutoComplete|textAutoCorrect"
                         android:maxLines="1"
-                        android:text="@={viewModel.shoppingList.name}" />
+                        android:text="@={viewModel.listName}" />
                 </com.google.android.material.textfield.TextInputLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
