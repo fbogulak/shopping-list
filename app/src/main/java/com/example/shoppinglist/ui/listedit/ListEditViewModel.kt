@@ -26,6 +26,7 @@ class ListEditViewModel(private val repository: ShoppingRepository) : BaseViewMo
     fun saveShoppingList() {
         viewModelScope.launch {
             shoppingList.name = listName.value ?: ""
+            shoppingList.date = Calendar.getInstance().time
             val result = if (shoppingList.id == 0L) {
                 repository.insertList(shoppingList)
             } else {

@@ -6,7 +6,7 @@ import java.util.*
 data class ShoppingList(
     var id: Long,
     var name: String,
-    val date: Date,
+    var date: Date,
     var isArchived: Boolean,
     val items: MutableList<ShoppingItem> = mutableListOf()
 ) {

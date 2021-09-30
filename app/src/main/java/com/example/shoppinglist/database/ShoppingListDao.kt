@@ -21,11 +21,11 @@ interface ShoppingListDao {
     fun getShoppingList(id: Long): DatabaseShoppingList
 
     @Transaction
-    @Query("SELECT * FROM shopping_list_table WHERE isArchived = 0")
+    @Query("SELECT * FROM shopping_list_table WHERE isArchived = 0 ORDER BY timestamp DESC")
     fun getCurrentListsWithItems(): LiveData<List<ShoppingListWithItems>>
 
     @Transaction
-    @Query("SELECT * FROM shopping_list_table WHERE isArchived = 1")
+    @Query("SELECT * FROM shopping_list_table WHERE isArchived = 1 ORDER BY timestamp DESC")
     fun getArchivedListsWithItems(): LiveData<List<ShoppingListWithItems>>
 
     @Query("DELETE FROM shopping_list_table WHERE id = :id")
