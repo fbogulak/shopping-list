@@ -1,6 +1,7 @@
 package com.example.shoppinglist.ui.shoppingitems.adapters
 
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -26,5 +27,14 @@ fun bindViewVisibilityToIsArchived(view: View, isArchived: Boolean?) {
         } else {
             view.visibility = View.VISIBLE
         }
+    }
+}
+
+@BindingAdapter("itemIsBought")
+fun bindImageViewToIsBought(imageView: ImageView, isBought: Boolean?) {
+    isBought?.let { bought ->
+        imageView.setImageResource(
+            if (bought) R.drawable.ic_check_filled else R.drawable.ic_check_outlined
+        )
     }
 }
