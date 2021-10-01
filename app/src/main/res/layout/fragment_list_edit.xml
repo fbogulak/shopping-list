@@ -53,7 +53,6 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:contentDescription="@string/save_changes"
-            android:onClick="@{() -> viewModel.saveShoppingList()}"
             app:srcCompat="@drawable/ic_save" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

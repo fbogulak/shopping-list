@@ -36,6 +36,7 @@
     <string name="shopping_list_unarchived">Shopping list unarchived</string>
     <string name="unarchive_list_to_edit_items">Unarchive list to edit items</string>
     <string name="error_changing_item_bought_status">Error changing item bought status</string>
+    <string name="list_must_have_name">List must have a name</string>
     <string name="item_must_have_name">Item must have a name</string>
     <string name="item_must_have_quantity">Item must have a quantity</string>
 </resources>
