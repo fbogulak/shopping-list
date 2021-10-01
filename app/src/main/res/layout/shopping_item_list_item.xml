@@ -69,7 +69,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="?attr/colorOnBackground"
+            app:tint="@color/primaryColor"
             tools:src="@drawable/ic_check_outlined" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
