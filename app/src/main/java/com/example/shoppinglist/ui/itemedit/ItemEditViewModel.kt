@@ -15,6 +15,7 @@ class ItemEditViewModel(private val repository: BaseRepository) : BaseViewModel(
     var shoppingItem = ShoppingItem(0, "", 0, Calendar.getInstance().time, false, 0)
     var itemName = MutableLiveData("")
     var itemQuantity = MutableLiveData<Int>()
+    var itemDate = MutableLiveData<Date>()
 
     private fun navigateBack() {
         navigationCommand.value = NavigationCommand.Back
@@ -24,7 +25,7 @@ class ItemEditViewModel(private val repository: BaseRepository) : BaseViewModel(
         viewModelScope.launch {
             shoppingItem.name = itemName.value ?: ""
             shoppingItem.quantity = itemQuantity.value ?: 0
-            shoppingItem.date =  Calendar.getInstance().time
+            shoppingItem.date = itemDate.value ?: Date()
             val result = if (shoppingItem.id == 0L) {
                 repository.insertItem(shoppingItem)
             } else {
@@ -58,6 +59,7 @@ class ItemEditViewModel(private val repository: BaseRepository) : BaseViewModel(
             shoppingItem = repository.getItem(shoppingItem.id)
             itemName.value = shoppingItem.name
             itemQuantity.value = shoppingItem.quantity
+            itemDate.value = shoppingItem.date
         }
     }
 }
