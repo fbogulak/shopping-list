@@ -9,9 +9,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
+import com.example.shoppinglist.R;
 import com.example.shoppinglist.databinding.FragmentItemEditBinding;
 import com.example.shoppinglist.ui.base.BaseFragment;
 import com.example.shoppinglist.ui.base.BaseViewModel;
+import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.Objects;
 
 public class ItemEditFragment extends BaseFragment {
 
@@ -29,6 +33,7 @@ public class ItemEditFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         setupBinding(inflater);
         setupShoppingItem();
+        setupListeners();
 
         return binding.getRoot();
     }
@@ -47,5 +52,25 @@ public class ItemEditFragment extends BaseFragment {
             viewModel.getItemFromDb();
         }
         viewModel.getShoppingItem().setListId(listId);
+    }
+
+    private void setupListeners() {
+        binding.saveItemFab.setOnClickListener(v -> {
+            if (Objects.requireNonNull(binding.nameEdit.getText()).toString().isEmpty()) {
+                binding.nameTextField.setError(getString(R.string.item_must_have_name));
+            } else if (Objects.requireNonNull(binding.quantityEdit.getText()).toString().isEmpty()) {
+                binding.quantityTextField.setError(getString(R.string.item_must_have_quantity));
+            } else {
+                viewModel.saveShoppingItem();
+            }
+        });
+        binding.nameEdit.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) binding.nameTextField.setError(null);
+        });
+        binding.nameEdit.setOnClickListener(v -> binding.nameTextField.setError(null));
+        binding.quantityEdit.setOnFocusChangeListener((View.OnFocusChangeListener) (v, hasFocus) -> {
+            if (hasFocus) binding.quantityTextField.setError(null);
+        });
+        binding.quantityEdit.setOnClickListener(v -> binding.quantityTextField.setError(null));
     }
 }
