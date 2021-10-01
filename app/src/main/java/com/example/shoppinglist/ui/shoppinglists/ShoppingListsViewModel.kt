@@ -3,12 +3,12 @@ package com.example.shoppinglist.ui.shoppinglists
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.example.shoppinglist.models.domain.ShoppingList
-import com.example.shoppinglist.repository.ShoppingRepository
+import com.example.shoppinglist.repository.BaseRepository
 import com.example.shoppinglist.ui.base.BaseViewModel
 import com.example.shoppinglist.ui.base.NavigationCommand
 import com.example.shoppinglist.ui.main.MainFragmentDirections
 
-class ShoppingListsViewModel(private val repository: ShoppingRepository) : BaseViewModel() {
+class ShoppingListsViewModel(private val repository: BaseRepository) : BaseViewModel() {
 
     private val currentLists by lazy { repository.currentLists }
     private val archivedLists by lazy { repository.archivedLists }

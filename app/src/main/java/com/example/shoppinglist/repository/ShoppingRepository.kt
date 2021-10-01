@@ -10,15 +10,15 @@ import com.example.shoppinglist.models.domain.asDatabaseModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class ShoppingRepository(private val database: ShoppingDatabase) {
-    val currentLists by lazy {
+class ShoppingRepository(private val database: ShoppingDatabase) : BaseRepository {
+    override val currentLists by lazy {
         database.shoppingListDao.getCurrentListsWithItems().map { it.asDomainModel() }
     }
-    val archivedLists by lazy {
+    override val archivedLists by lazy {
         database.shoppingListDao.getArchivedListsWithItems().map { it.asDomainModel() }
     }
 
-    suspend fun insertList(shoppingList: ShoppingList): Result<Long> = withContext(Dispatchers.IO) {
+    override suspend fun insertList(shoppingList: ShoppingList): Result<Long> = withContext(Dispatchers.IO) {
         try {
             val newId = database.shoppingListDao.insert(shoppingList.asDatabaseModel())
             return@withContext if (newId > 0L) {
@@ -31,7 +31,7 @@ class ShoppingRepository(private val database: ShoppingDatabase) {
         }
     }
 
-    suspend fun deleteList(listId: Long): Result<Int> = withContext(Dispatchers.IO) {
+    override suspend fun deleteList(listId: Long): Result<Int> = withContext(Dispatchers.IO) {
         try {
             database.shoppingItemDao.deleteItemsByListId(listId)
             val deletedRows = database.shoppingListDao.deleteById(listId)
@@ -45,11 +45,11 @@ class ShoppingRepository(private val database: ShoppingDatabase) {
         }
     }
 
-    suspend fun getListName(listId: Long): String = withContext(Dispatchers.IO) {
+    override suspend fun getListName(listId: Long): String = withContext(Dispatchers.IO) {
         return@withContext database.shoppingListDao.getListNameById(listId)
     }
 
-    suspend fun updateListName(listId: Long, newName: String): Result<Int> =
+    override suspend fun updateListName(listId: Long, newName: String): Result<Int> =
         withContext(Dispatchers.IO) {
             try {
                 val updatedRows = database.shoppingListDao.updateListName(listId, newName)
@@ -63,7 +63,7 @@ class ShoppingRepository(private val database: ShoppingDatabase) {
             }
         }
 
-    suspend fun setListIsArchived(listId: Long, archiveList: Boolean): Result<Boolean> =
+    override suspend fun setListIsArchived(listId: Long, archiveList: Boolean): Result<Boolean> =
         withContext(Dispatchers.IO) {
             try {
                 val updatedRows =
@@ -78,14 +78,14 @@ class ShoppingRepository(private val database: ShoppingDatabase) {
             }
         }
 
-    fun getShoppingItems(listId: Long): LiveData<List<ShoppingItem>> =
+    override fun getShoppingItems(listId: Long): LiveData<List<ShoppingItem>> =
         database.shoppingItemDao.getItemsByListId(listId).map { it.asDomainModel() }
 
-    suspend fun getItem(itemId: Long): ShoppingItem = withContext(Dispatchers.IO) {
+    override suspend fun getItem(itemId: Long): ShoppingItem = withContext(Dispatchers.IO) {
         return@withContext database.shoppingItemDao.getItemById(itemId).asDomainModel()
     }
 
-    suspend fun insertItem(shoppingItem: ShoppingItem): Result<Long> = withContext(Dispatchers.IO) {
+    override suspend fun insertItem(shoppingItem: ShoppingItem): Result<Long> = withContext(Dispatchers.IO) {
         try {
             val newId = database.shoppingItemDao.insert(shoppingItem.asDatabaseModel())
             return@withContext if (newId > 0L) {
@@ -98,7 +98,7 @@ class ShoppingRepository(private val database: ShoppingDatabase) {
         }
     }
 
-    suspend fun updateItem(shoppingItem: ShoppingItem): Result<Int> = withContext(Dispatchers.IO) {
+    override suspend fun updateItem(shoppingItem: ShoppingItem): Result<Int> = withContext(Dispatchers.IO) {
         try {
             val updatedRows = database.shoppingItemDao.update(shoppingItem.asDatabaseModel())
             return@withContext if (updatedRows == 1) {
@@ -111,7 +111,7 @@ class ShoppingRepository(private val database: ShoppingDatabase) {
         }
     }
 
-    suspend fun reverseItemIsBought(itemId: Long): Result<Int> = withContext(Dispatchers.IO) {
+    override suspend fun reverseItemIsBought(itemId: Long): Result<Int> = withContext(Dispatchers.IO) {
         try {
             val updatedRows = database.shoppingItemDao.reverseItemIsBoughtById(itemId)
             return@withContext if (updatedRows == 1) {

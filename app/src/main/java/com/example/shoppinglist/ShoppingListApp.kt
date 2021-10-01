@@ -2,6 +2,7 @@ package com.example.shoppinglist
 
 import android.app.Application
 import com.example.shoppinglist.database.ShoppingDatabase
+import com.example.shoppinglist.repository.BaseRepository
 import com.example.shoppinglist.repository.ShoppingRepository
 import com.example.shoppinglist.ui.itemedit.ItemEditViewModel
 import com.example.shoppinglist.ui.listedit.ListEditViewModel
@@ -19,7 +20,7 @@ class ShoppingListApp : Application() {
 
         val appModule = module {
             single { ShoppingDatabase.getInstance(this@ShoppingListApp) }
-            single { ShoppingRepository(get()) }
+            single { ShoppingRepository(get()) as BaseRepository }
             viewModel { ShoppingListsViewModel(get()) }
             viewModel { ListEditViewModel(get()) }
             viewModel { ShoppingItemsViewModel(get()) }

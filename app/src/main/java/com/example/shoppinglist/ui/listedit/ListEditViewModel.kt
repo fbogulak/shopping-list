@@ -4,13 +4,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.shoppinglist.R
 import com.example.shoppinglist.models.domain.ShoppingList
-import com.example.shoppinglist.repository.ShoppingRepository
+import com.example.shoppinglist.repository.BaseRepository
 import com.example.shoppinglist.ui.base.BaseViewModel
 import com.example.shoppinglist.ui.base.NavigationCommand
 import kotlinx.coroutines.launch
 import java.util.*
 
-class ListEditViewModel(private val repository: ShoppingRepository) : BaseViewModel() {
+class ListEditViewModel(private val repository: BaseRepository) : BaseViewModel() {
 
     val shoppingList = ShoppingList(0, "", Calendar.getInstance().time, false)
     val listName = MutableLiveData("")
