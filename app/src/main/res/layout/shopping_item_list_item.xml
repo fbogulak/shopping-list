@@ -36,7 +36,7 @@
             android:text="@{shoppingItem.name}"
             app:layout_constraintBottom_toTopOf="@+id/quantity_text"
             app:layout_constraintEnd_toStartOf="@+id/is_bought_button"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/basket_icon"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="Shopping Item" />
@@ -51,7 +51,7 @@
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toTopOf="@id/divider"
             app:layout_constraintEnd_toStartOf="@+id/is_bought_button"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/basket_icon"
             app:layout_constraintTop_toBottomOf="@+id/name_text"
             app:shoppingItemQuantity="@{shoppingItem.quantity}"
             tools:text="X10" />
@@ -74,7 +74,7 @@
             tools:src="@drawable/ic_check_outlined" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/basket_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
