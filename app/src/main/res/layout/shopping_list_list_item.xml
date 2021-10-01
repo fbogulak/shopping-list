@@ -21,6 +21,7 @@
 
         <TextView
             android:id="@+id/name_text"
+            style="@style/list_item_title_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -34,6 +35,7 @@
 
         <TextView
             android:id="@+id/progress_text"
+            style="@style/list_item_description_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

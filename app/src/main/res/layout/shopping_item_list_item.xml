@@ -25,6 +25,7 @@
 
         <TextView
             android:id="@+id/name_text"
+            style="@style/list_item_title_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -41,6 +42,7 @@
 
         <TextView
             android:id="@+id/quantity_text"
+            style="@style/list_item_description_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -62,11 +64,11 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
+            android:onClick="@{() -> boughtListener.onClick(shoppingItem.id)}"
             app:itemIsBought="@{shoppingItem.isBought}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:onClick="@{() -> boughtListener.onClick(shoppingItem.id)}"
             app:tint="?attr/colorOnBackground"
             tools:src="@drawable/ic_check_outlined" />
 
