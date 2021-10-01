@@ -70,7 +70,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/primaryColor"
-            tools:src="@drawable/ic_check_outlined" />
+            tools:src="@drawable/ic_check_outlined"
+            android:contentDescription="@string/change_item_bought_status" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
