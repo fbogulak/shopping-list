@@ -13,8 +13,8 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
+            style="@style/Widget.MaterialComponents.TabLayout.PrimarySurface"
             android:layout_width="match_parent"
-            style="@style/Widget.MaterialComponents.TabLayout.Colored"
             android:layout_height="wrap_content"
             app:tabMode="fixed" />
 
