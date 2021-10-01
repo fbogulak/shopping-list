@@ -24,4 +24,7 @@ interface ShoppingItemDao {
 
     @Query("DELETE FROM shopping_item_table WHERE listId = :listId")
     fun deleteItemsByListId(listId: Long): Int
+
+    @Query("UPDATE shopping_item_table SET isBought = NOT isBought WHERE id = :id")
+    fun reverseItemIsBoughtById(id: Long): Int
 }

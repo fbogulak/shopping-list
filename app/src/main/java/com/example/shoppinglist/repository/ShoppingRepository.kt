@@ -111,4 +111,17 @@ class ShoppingRepository(private val database: ShoppingDatabase) {
         }
     }
 
+    suspend fun reverseItemIsBought(itemId: Long): Result<Int> = withContext(Dispatchers.IO) {
+        try {
+            val updatedRows = database.shoppingItemDao.reverseItemIsBoughtById(itemId)
+            return@withContext if (updatedRows == 1) {
+                Result.success(updatedRows)
+            } else {
+                Result.failure(Throwable())
+            }
+        } catch (e: Exception) {
+            return@withContext Result.failure(e)
+        }
+    }
+
 }

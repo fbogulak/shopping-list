@@ -12,6 +12,10 @@
         <variable
             name="onClickListener"
             type="com.example.shoppinglist.ui.shoppingitems.adapters.ShoppingItemsListAdapter.ShoppingItemListener" />
+
+        <variable
+            name="boughtListener"
+            type="com.example.shoppinglist.ui.shoppingitems.adapters.ShoppingItemsListAdapter.BoughtListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -62,6 +66,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:onClick="@{() -> boughtListener.onClick(shoppingItem.id)}"
             app:tint="?attr/colorOnBackground"
             tools:src="@drawable/ic_check_outlined" />
 

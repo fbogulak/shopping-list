@@ -85,4 +85,13 @@ class ShoppingItemsViewModel(private val repository: ShoppingRepository) : BaseV
         }
         showToast(R.string.error_archiving_unarchiving_list)
     }
+
+    fun reverseItemIsBought(itemId: Long) {
+        viewModelScope.launch {
+            val result = repository.reverseItemIsBought(itemId)
+            result.onFailure {
+                showToast(R.string.error_changing_item_bought_status)
+            }
+        }
+    }
 }

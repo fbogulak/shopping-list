@@ -35,4 +35,5 @@
     <string name="unarchive_list">Unarchive list</string>
     <string name="shopping_list_unarchived">Shopping list unarchived</string>
     <string name="unarchive_list_to_edit_items">Unarchive list to edit items</string>
+    <string name="error_changing_item_bought_status">Error changing item bought status</string>
 </resources>

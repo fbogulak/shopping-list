@@ -45,20 +45,27 @@ class ShoppingItemsFragment : BaseFragment() {
 
     private fun setupRecycler() {
         binding.shoppingItemsRecycler.adapter =
-            ShoppingItemsListAdapter(
-                if (viewModel.listIsArchived) {
+            if (viewModel.listIsArchived) {
+                ShoppingItemsListAdapter(
                     ShoppingItemsListAdapter.ShoppingItemListener {
                         viewModel.showToast(R.string.unarchive_list_to_edit_items)
-                    }
-                } else {
+                    },
+                    ShoppingItemsListAdapter.BoughtListener {
+                        viewModel.showToast(R.string.unarchive_list_to_edit_items)
+                    })
+            } else {
+                ShoppingItemsListAdapter(
                     ShoppingItemsListAdapter.ShoppingItemListener { shoppingItem ->
                         viewModel.navToItemEdit(
                             shoppingItem.id,
                             shoppingItem.listId,
                             getString(R.string.edit_list_item)
                         )
-                    }
-                })
+                    },
+                    ShoppingItemsListAdapter.BoughtListener { itemId ->
+                        viewModel.reverseItemIsBought(itemId)
+                    })
+            }
     }
 
     private fun setupListeners() {
