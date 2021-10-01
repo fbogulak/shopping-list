@@ -40,4 +40,6 @@
     <string name="item_must_have_name">Item must have a name</string>
     <string name="item_must_have_quantity">Item must have a quantity</string>
     <string name="change_item_bought_status">Change item bought status</string>
+    <string name="shopping_cart_icon">Shopping cart icon</string>
+    <string name="shopping_basket_icon">Shopping basket icon</string>
 </resources>

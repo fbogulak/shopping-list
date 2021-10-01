@@ -34,8 +34,7 @@
             android:text="@{shoppingItem.name}"
             app:layout_constraintBottom_toTopOf="@+id/quantity_text"
             app:layout_constraintEnd_toStartOf="@+id/is_bought_button"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="Shopping Item" />
@@ -50,8 +49,7 @@
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/is_bought_button"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/name_text"
             app:shoppingItemQuantity="@{shoppingItem.quantity}"
             tools:text="X10" />
@@ -64,14 +62,28 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
+            android:contentDescription="@string/change_item_bought_status"
             android:onClick="@{() -> boughtListener.onClick(shoppingItem.id)}"
             app:itemIsBought="@{shoppingItem.isBought}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/primaryColor"
-            tools:src="@drawable/ic_check_outlined"
-            android:contentDescription="@string/change_item_bought_status" />
+            tools:src="@drawable/ic_check_outlined" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/shopping_basket_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_basket"
+            app:tint="@color/primaryColor" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
