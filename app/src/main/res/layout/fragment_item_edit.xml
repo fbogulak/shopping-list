@@ -63,6 +63,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
+                        android:maxLength="5"
                         android:maxLines="1"
                         app:quantity="@={viewModel.itemQuantity}" />
                 </com.google.android.material.textfield.TextInputLayout>
